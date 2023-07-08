@@ -8,7 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: e4e6b36fc9479444eb861833a5b726de
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Intro.unity
     guid: abf27e5c1abf2c54d92541d24c293a2b
+  - enabled: 0
+    path: Assets/chess game/Scenes/FirstScene.unity
+    guid: b1e0d63c6bc7c524ba2a245273c6005d
+  - enabled: 1
+    path: Assets/FirstLevel.unity
+    guid: ecc09fc13bf830540b651fbf6ddc31b2
   m_configObjects: {}
