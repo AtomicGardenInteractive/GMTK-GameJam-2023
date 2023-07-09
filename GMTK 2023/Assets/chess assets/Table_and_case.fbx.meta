@@ -3,7 +3,27 @@ guid: 4b5e74e7a2647f04b8da4991bafa61f8
 ModelImporter:
   serializedVersion: 20300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BoxWood
+    second: {fileID: 2100000, guid: 2f560d91d304ab3428b3b4fa180d8697, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal
+    second: {fileID: 2100000, guid: 80c59dd700320d54ba88884ea66739b0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Padding
+    second: {fileID: 2100000, guid: 2206c01c8aa1b5045883df51b815b617, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TableWoodWood
+    second: {fileID: 2100000, guid: 518615905b0569c428eada77544068bf, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

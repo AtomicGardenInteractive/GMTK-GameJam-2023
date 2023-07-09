@@ -47,7 +47,7 @@ public class PieceManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        moves = new object[8,3]{
+        moves = new object[16,3]{
             {bKnight1, 0,5},
             {bKnight1, 2,4},
             {bKnight1, 2,4},
@@ -55,8 +55,16 @@ public class PieceManager : MonoBehaviour
             {bKnight1, 2,4},
             {bKnight1, 2,4},
             {bKnight1, 2,4},
+            {bKnight1, 2,4},
+            {bKnight1, 2,4},
+            {bKnight1, 2,4},
+            {bKnight1, 2,4},
+            {bKnight1, 2,4},
+            {bKnight1, 2,4},
+            {bKnight1, 2,4},
+            {bKnight1, 2,4},
             {bKnight1, 2,4}
-            
+
         };
     }
 
@@ -66,9 +74,16 @@ public class PieceManager : MonoBehaviour
         if(TurnController.GetComponent<TurnControls>().EnemyTurn)
         {
             int turn = TurnController.GetComponent<TurnControls>().GetTurn();
-            GameObject peice = (GameObject)moves[turn,0];
-            peice.GetComponent<PieceAttributes>().GoTo((int)moves[turn,1], (int)moves[turn,2]);
-            TurnController.GetComponent<TurnControls>().TurnDone();
+            if(turn > moves.Length)
+            {
+
+            }
+            else
+            {
+                GameObject peice = (GameObject)moves[turn, 0];
+                peice.GetComponent<PieceAttributes>().GoTo((int)moves[turn, 1], (int)moves[turn, 2]);
+                TurnController.GetComponent<TurnControls>().TurnDone();
+            }
         }
     }
 

@@ -40,6 +40,12 @@ public class UserInput : MonoBehaviour
                             theTileManager.movePlayer(hit.collider.gameObject.GetComponent<TileInformation>().getPos());
                             //theTileManager.enemyTaken(hit.collider.gameObject.GetComponent<TileInformation>().getPos());
                         }
+                        if (hit.collider.gameObject.GetComponent<TileInformation>().getDescription() == TileInformation.description.AvailableFriendly)
+                        {
+                            Debug.Log("Team");
+                            //theTileManager.movePlayer(hit.collider.gameObject.GetComponent<TileInformation>().getPos());
+                            //theTileManager.enemyTaken(hit.collider.gameObject.GetComponent<TileInformation>().getPos());
+                        }
                         TurnControl.GetComponent<TurnControls>().StartEnemyTurn();
                     }
 

@@ -207,7 +207,7 @@ public class TileManager : MonoBehaviour
         if (isWhite)
         {
             board[allFriendlies[pieceNumber].friendlyPos[0], allFriendlies[pieceNumber].friendlyPos[1]].GetComponent<Renderer>().material.color = colour;
-            board[x,z].GetComponent<Renderer>().material.color = Color.green;
+            //board[x,z].GetComponent<Renderer>().material.color = Color.green;
             allFriendlies[pieceNumber].friendlyPos[0] = x;
             allFriendlies[pieceNumber].friendlyPos[1] = z;
         }
@@ -597,7 +597,7 @@ public class TileManager : MonoBehaviour
     //    }
 
     //}
-    private void updateBoard()
+    public void updateBoard()
     {
         clearBoard();
         checkIfPlayerOnEnemy();

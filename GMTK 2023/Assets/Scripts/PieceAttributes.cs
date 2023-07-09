@@ -31,9 +31,9 @@ public class PieceAttributes : MonoBehaviour
         bool colourBlack = true;
         transform.position = new Vector3(tempx , (float)9.920979 -8, tempz );
 
-        if( x%2 == 0)
+        if( newx%2 == 0)
         {
-            if(z%2 == 0)
+            if(newz%2 == 0)
             {
                 colourBlack = true;
             }
@@ -43,7 +43,7 @@ public class PieceAttributes : MonoBehaviour
         }
         else
         {
-           if(z%2 == 0)
+           if(newz%2 == 0)
             {
                 colourBlack = false;
             }
@@ -54,11 +54,13 @@ public class PieceAttributes : MonoBehaviour
 
         if (colourBlack)
         {
-            TileController.GetComponent<TileManager>().movePieceTile(x,z, isWhite ,number, true);
+            TileController.GetComponent<TileManager>().movePieceTile(newx, newz, isWhite, number, true);
         }
         else{
-            TileController.GetComponent<TileManager>().movePieceTile(x,z, isWhite, number, false);
+            TileController.GetComponent<TileManager>().movePieceTile(newx,newz, isWhite, number, false);
         }
-        
+
+        TileController.GetComponent<TileManager>().updateBoard();
+
     }
 }
