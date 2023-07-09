@@ -35,7 +35,12 @@ public class UserInput : MonoBehaviour
                     if (hit.collider.gameObject.GetComponent<TileInformation>().getDescription() == TileInformation.description.AvailableEnemy)
                     {
                         theTileManager.movePlayer(hit.collider.gameObject.GetComponent<TileInformation>().getPos());
-                        //theTileManager.enemyTaken(hit.collider.gameObject.GetComponent<TileInformation>().getPos());
+                    }
+                    if (hit.collider.gameObject.GetComponent<TileInformation>().getDescription() == TileInformation.description.AvailableFriendly)
+                    {
+                        
+                        Debug.Log("Pressed friendly");
+                        //theTileManager.movePlayer(hit.collider.gameObject.GetComponent<TileInformation>().getPos());
                     }
                 }
 

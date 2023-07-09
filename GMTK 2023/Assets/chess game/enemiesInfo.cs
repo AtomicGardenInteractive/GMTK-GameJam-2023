@@ -27,3 +27,11 @@ public class enemiesInfo
     }
 
 }
+
+public class friendliesInfo
+{
+    public enum friendlyPiece { pawn, knight, bishop, rook, queen }
+    public int[] friendlyPos;
+    public bool taken = false;
+    public GameObject thePiece;
+}

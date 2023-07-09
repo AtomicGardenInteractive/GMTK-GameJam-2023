@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TileInformation : MonoBehaviour
 {
-    [SerializeField] public enum description {EmptyTile, PlayerTile, AvailableTile, ChestTile, EnemyTile, AvailableEnemy }
+    [SerializeField] public enum description {EmptyTile, PlayerTile, AvailableTile, ChestTile, EnemyTile, AvailableEnemy, Friendly, AvailableFriendly }
     [SerializeField] private description TileDescription = description.EmptyTile;
     [SerializeField] private Color TileColor;
     [SerializeField] private int[] tilePos = new int[2];
@@ -33,6 +33,16 @@ public class TileInformation : MonoBehaviour
     public void setToDefault()
     {
         TileDescription = description.EmptyTile;
+    }
+
+    public void setToFriendly()
+    {
+        TileDescription = description.Friendly;
+    }
+
+    public void setToAvailableFriendly()
+    {
+        TileDescription = description.AvailableFriendly;
     }
 
     public void setColor(Color newColor)

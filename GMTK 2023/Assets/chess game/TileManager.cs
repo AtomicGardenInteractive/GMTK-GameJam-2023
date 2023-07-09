@@ -24,17 +24,20 @@ public class TileManager : MonoBehaviour
     [SerializeField] private Color defaultColorBlack;
 
     [SerializeField] private GameObject emptyEnemyInfo;
+    [SerializeField] private GameObject emptyFriendlyInfo;
 
     [SerializeField] private playerInfo thePlayer;
     [SerializeField] private List<enemiesInfo> allEnemies = new List<enemiesInfo>();
     [SerializeField] private enemiesInfo enemyToRemove;
 
+    [SerializeField] private List<friendliesInfo> allFriendlies = new List<friendliesInfo>();
+
     [SerializeField] private GameObject playerPieceObject;
-    [SerializeField] private GameObject enemyPieceObject;
 
     [SerializeField] private bool isFirstMove = true;
 
     [SerializeField] private GameObject[] allBlackPieces;
+    [SerializeField] private GameObject[] allWhitePieces;
 
     bool isWhite = true;
     void Start()
@@ -46,8 +49,11 @@ public class TileManager : MonoBehaviour
         setPlayerTile();
         //spawnEnemy();
         addEnemies();
+        addFriendlies();
         checkWhichTiles();
         checkIfBothEnemy();
+        checkIfBothFriendly();
+        
 
         //thePlayer.playerPiece = playerInfo.pieceType.pawn;
     }
@@ -105,7 +111,64 @@ public class TileManager : MonoBehaviour
 
     }
 
+    private void addFriendlies()
+    {
+        //back row
+        //board[0, 0].GetComponent<Renderer>().material.color = Color.green;
+        board[0, 0].GetComponent<TileInformation>().setToFriendly();
+        addToFriendlies(0, 0, 0);
+        //board[1, 0].GetComponent<Renderer>().material.color = Color.green;
+        board[1, 0].GetComponent<TileInformation>().setToFriendly();
+        addToFriendlies(1, 0, 1);
+        // Player piece
 
+        //board[2, 0].GetComponent<Renderer>().material.color = Color.green;
+        //board[2, 0].GetComponent<TileInformation>().setToFriendly();
+        //addToFriendlies(2, 0, 2);
+
+        //board[3, 0].GetComponent<Renderer>().material.color = Color.green;
+        board[3, 0].GetComponent<TileInformation>().setToFriendly();
+        addToFriendlies(3, 0, 3);
+        //board[4, 0].GetComponent<Renderer>().material.color = Color.green;
+        board[4, 0].GetComponent<TileInformation>().setToFriendly();
+        addToFriendlies(4, 0, 4);
+        //board[5, 0].GetComponent<Renderer>().material.color = Color.green;
+        board[5, 0].GetComponent<TileInformation>().setToFriendly();
+        addToFriendlies(5, 0, 5);
+        //board[6, 0].GetComponent<Renderer>().material.color = Color.green;
+        board[6, 0].GetComponent<TileInformation>().setToFriendly();
+        addToFriendlies(6, 0, 6);
+        //board[7, 0].GetComponent<Renderer>().material.color = Color.green;
+        board[7, 0].GetComponent<TileInformation>().setToFriendly();
+        addToFriendlies(7, 0, 7);
+
+        //front row
+       // board[0, 1].GetComponent<Renderer>().material.color = Color.green;
+        board[0, 1].GetComponent<TileInformation>().setToFriendly();
+        addToFriendlies(0, 1, 8);
+        //board[1, 1].GetComponent<Renderer>().material.color = Color.green;
+        board[1, 1].GetComponent<TileInformation>().setToFriendly();
+        addToFriendlies(1, 1, 9);
+        //board[2, 1].GetComponent<Renderer>().material.color = Color.green;
+        board[2, 1].GetComponent<TileInformation>().setToFriendly();
+        addToFriendlies(2, 1, 10);
+        //board[3, 1].GetComponent<Renderer>().material.color = Color.green;
+        board[3, 1].GetComponent<TileInformation>().setToFriendly();
+        addToFriendlies(3, 1, 11);
+        //board[4, 1].GetComponent<Renderer>().material.color = Color.green;
+        board[4, 1].GetComponent<TileInformation>().setToFriendly();
+        addToFriendlies(4, 1, 12);
+        //board[5, 1].GetComponent<Renderer>().material.color = Color.green;
+        board[5, 1].GetComponent<TileInformation>().setToFriendly();
+        addToFriendlies(5, 1, 13);
+        //board[6, 1].GetComponent<Renderer>().material.color = Color.green;
+        board[6, 1].GetComponent<TileInformation>().setToFriendly();
+        addToFriendlies(6, 1, 14);
+        //board[7, 1].GetComponent<Renderer>().material.color = Color.green;
+        board[7, 1].GetComponent<TileInformation>().setToFriendly();
+        addToFriendlies(7, 1, 15);
+
+    }
 
     private void addToEnemies(int x, int z, int pieceNum)
     {
@@ -115,6 +178,35 @@ public class TileManager : MonoBehaviour
         newEnemy.enemyPos[0] = x;
         newEnemy.enemyPos[1] = z;
         allEnemies.Add(newEnemy);
+    }
+
+    private void addToFriendlies(int x, int z, int pieceNum)
+    {
+        friendliesInfo newFriendly = new friendliesInfo();
+        newFriendly.thePiece = allWhitePieces[pieceNum];
+        newFriendly.friendlyPos = new int[2];
+        newFriendly.friendlyPos[0] = x;
+        newFriendly.friendlyPos[1] = z;
+        allFriendlies.Add(newFriendly);
+    }
+
+    public void movePieceTile(int x, int z, bool isWhite, int pieceNumber, Color oldTileColour)
+    {
+        if (isWhite)
+        {
+            board[allFriendlies[pieceNumber].friendlyPos[0], allFriendlies[pieceNumber].friendlyPos[1]].GetComponent<Renderer>().material.color = oldTileColour;
+            board[x,z].GetComponent<Renderer>().material.color = Color.green;
+            allFriendlies[pieceNumber].friendlyPos[0] = x;
+            allFriendlies[pieceNumber].friendlyPos[1] = z;
+        }
+        else
+        {
+            board[allEnemies[pieceNumber].enemyPos[0], allEnemies[pieceNumber].enemyPos[1]].GetComponent<Renderer>().material.color = oldTileColour;
+            board[x, z].GetComponent<Renderer>().material.color = Color.red;
+            allEnemies[pieceNumber].enemyPos[0] = x;
+            allEnemies[pieceNumber].enemyPos[1] = z;
+        }
+
     }
 
     //private void spawnEnemy()
@@ -214,13 +306,13 @@ public class TileManager : MonoBehaviour
             board[playerPosition[0], playerPosition[1] + 1].GetComponent<Renderer>().material.color = availableTileColor;
         }
 
-        if (checkIfExists(playerPosition[0] + 1, playerPosition[1] - 1, "NE"))
+        if (checkIfExists(playerPosition[0] + 1, playerPosition[1] + 1, "NE"))
         {
             board[playerPosition[0] + 1, playerPosition[1] + 1].GetComponent<TileInformation>().setToAvailable();
         }
 
 
-        if (checkIfExists(playerPosition[0] - 1, playerPosition[1] - 1, "NW"))
+        if (checkIfExists(playerPosition[0] - 1, playerPosition[1] + 1, "NW"))
         {
             board[playerPosition[0] - 1, playerPosition[1] + 1].GetComponent<TileInformation>().setToAvailable();
         }
@@ -529,12 +621,15 @@ public class TileManager : MonoBehaviour
     {
         clearBoard();
         checkIfPlayerOnEnemy();
+        checkIfPlayerOnFriendly();
         setEnemyTiles();
+        setFriendlyTiles();
         setPlayerTile();
         checkWhichTiles();
         //moveEnemy();
         //setEnemyTile();
         checkIfBothEnemy();
+        checkIfBothFriendly();
         setPlayerTile();
 
 
@@ -548,10 +643,23 @@ public class TileManager : MonoBehaviour
             {
                 enemy.thePiece.SetActive(false);
                 enemyToRemove = enemy;
+                Debug.Log("on enemy");
             }   
         }
         allEnemies.Remove(enemyToRemove);
     }
+
+    private void checkIfPlayerOnFriendly()
+    {
+        foreach (friendliesInfo friend in allFriendlies)
+        {
+            if (playerPosition[0] == friend.friendlyPos[0] && playerPosition[1] == friend.friendlyPos[1])
+            {
+                //Debug.Log("On friend");
+            }
+        }
+    }
+
     private void setEnemyTiles()
     {
         foreach(enemiesInfo enemy in allEnemies)
@@ -561,21 +669,56 @@ public class TileManager : MonoBehaviour
         }
     }
 
+    private void setFriendlyTiles()
+    {
+        foreach (friendliesInfo friend in allFriendlies)
+        {
+            //board[friend.friendlyPos[0], friend.friendlyPos[1]].GetComponent<Renderer>().material.color = Color.green;
+            board[friend.friendlyPos[0], friend.friendlyPos[1]].GetComponent<TileInformation>().setToFriendly();
+        }
+    }
+
     private void checkIfBothEnemy()
     {
         foreach (enemiesInfo enemy in allEnemies)
         {
             if (board[enemy.enemyPos[0], enemy.enemyPos[1]].GetComponent<TileInformation>().getDescription() == TileInformation.description.AvailableTile)
             {
-                if(thePlayer.playerPiece == playerInfo.pieceType.pawn && board[playerPosition[0], playerPosition[1] - 1] == board[enemy.enemyPos[0], enemy.enemyPos[1]])
+                if(thePlayer.playerPiece == playerInfo.pieceType.pawn && board[playerPosition[0], playerPosition[1] + 1] == board[enemy.enemyPos[0], enemy.enemyPos[1]])
                 {
                     board[enemy.enemyPos[0], enemy.enemyPos[1]].GetComponent<TileInformation>().setToEnemy();
+                    board[enemy.enemyPos[0], enemy.enemyPos[1]].GetComponent<Renderer>().material.color = Color.red;
                 }
-                board[enemy.enemyPos[0], enemy.enemyPos[1]].GetComponent<TileInformation>().setToAvailableEnemy();
-                board[enemy.enemyPos[0], enemy.enemyPos[1]].GetComponent<Renderer>().material.color = Color.magenta;
+                else
+                {
+                    board[enemy.enemyPos[0], enemy.enemyPos[1]].GetComponent<TileInformation>().setToAvailableEnemy();
+                    board[enemy.enemyPos[0], enemy.enemyPos[1]].GetComponent<Renderer>().material.color = Color.magenta;
+                }
             }
         }
     }
+
+    private void checkIfBothFriendly()
+    {
+        foreach (friendliesInfo friend in allFriendlies)
+        {
+            if (board[friend.friendlyPos[0], friend.friendlyPos[1]].GetComponent<TileInformation>().getDescription() == TileInformation.description.AvailableTile)
+            {
+                if (thePlayer.playerPiece == playerInfo.pieceType.pawn && board[playerPosition[0], playerPosition[1] + 1] == board[friend.friendlyPos[0], friend.friendlyPos[1]])
+                {
+                    board[friend.friendlyPos[0], friend.friendlyPos[1]].GetComponent<TileInformation>().setToFriendly();
+                    board[friend.friendlyPos[0], friend.friendlyPos[1]].GetComponent<Renderer>().material.color = Color.green;
+                }
+                else
+                {
+                    board[friend.friendlyPos[0], friend.friendlyPos[1]].GetComponent<TileInformation>().setToAvailableFriendly();
+                    board[friend.friendlyPos[0], friend.friendlyPos[1]].GetComponent<Renderer>().material.color = Color.cyan;
+                }
+            }
+        }
+    }
+
+
     private void clearBoard()
     {
         for (int i = 0; i < boardX; i++)
